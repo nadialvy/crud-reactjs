@@ -5,6 +5,7 @@ import ToolkitProvider, {
   Search,
 } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator";
+import { Link } from "react-router-dom";
 
 const { SearchBar } = Search;
 
@@ -33,12 +34,16 @@ const columns = [
     formatter: (rowContent, row) => {
       return (
         <div className="">
-          <Button color="info" className="mr-2">
-            Detail
-          </Button>
-          <Button color="success" className="mr-2">
-            Edit
-          </Button>
+          <Link to={"detail/"+row.id}>
+            <Button color="info" className="mr-2">
+              Detail
+            </Button>
+          </Link>
+          <Link to={"edit/"+row.id}>
+            <Button color="success" className="mr-2">
+              Edit
+            </Button>
+          </Link>
           <Button color="danger" className="mr-2">
             Hapus
           </Button>
@@ -68,7 +73,12 @@ const TableComponent = (props) => {
       >
         {(props) => (
           <div>
-            <SearchBar {...props.searchProps} />
+            <Link to={"create/"}>
+              <Button color="info" className="mr-2">
+                Tambah User
+              </Button>
+            </Link>
+            <SearchBar {...props.searchProps} placeholder="Search..." />
             <hr />
             <BootstrapTable {...props.baseProps} pagination={ paginationFactory() } />
           </div>
